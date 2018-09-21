@@ -1,7 +1,7 @@
 Feature: Privacy policy popup
 
 
-Scenario: Navigate to the privacy policy info through the checkbox link
+Scenario: Navigate to the privacy policy via link
 
     Given unauthorized user on job application form
 

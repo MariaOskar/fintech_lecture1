@@ -1,7 +1,7 @@
 Feature: Button for application scrolls a page to the job application form.
 
 
-Scenario: Navigate to the job application form through the button
+Scenario: Navigate to the form via button
 
     Given unauthorized user on moscow-job.tinkoff.ru page
 

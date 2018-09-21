@@ -1,7 +1,7 @@
 Feature: Links on the page lead to correct corresponding pages
 
 
-Scenario: Navigate to the weboffice.tinkoff.page through the link
+Scenario: Navigate to correct page via the link
 
     Given unauthorized user on moscow-job.tinkoff.ru page
 

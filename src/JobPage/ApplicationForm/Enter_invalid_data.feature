@@ -2,7 +2,46 @@ Feature: Fill the application form with invalid data and submit.
 
 
 
-Scenario: Submit form with invalid name ( fill only name, without surname)
+Scenario: Enter invalid data and clear the field
+
+    Given unauthorized user on the job application form
+
+    When User enters invalid data <data> to the field <field>
+    And click cross-button
+
+    Then textfield has been cleared
+
+  Examples:
+  |field         |data   |
+  |fio           |Vasya  |
+  |email         |test@  |
+  |phone         |123    |
+  |city          |3g3h2  |
+
+
+
+Scenario: Submit form with blank field
+
+    Given unauthorized user on the application form
+
+    When user enters valid data except for the field <field> (name <name>, email <email>, phone <phone>, city <city>, vacancy <vacancy>)
+    And User selects checkbox of privacy policy
+
+    Then the submit button has stayed disabled
+    And the appropriate message '<message>' has displayed
+
+  Examples:
+  |field   |name        |email          |phone        |city    |vacancy               |message           |
+  |fio     |            |test@test.ru   |5555555555   |Moscow  |Продавец-консультант  |Поле обязательное |
+  |email   |Иван Иванов |               |5555555555   |Moscow  |Продавец-консультант  |Поле обязательное |
+  |phone   |Иван Иванов |test@test.ru   |             |Moscow  |Продавец-консультант  |Поле обязательное |
+  |city    |Иван Иванов |test@test.ru   |5555555555   |        |Продавец-консультант  |Поле обязательное |
+  |vacancy |Иван Иванов |test@test.ru   |5555555555   |Moscow  |                      |Поле обязательное |
+
+
+
+
+Scenario: Submit form with name without surname
 
     Given unauthorized user on the application form
 
@@ -16,24 +55,6 @@ Scenario: Submit form with invalid name ( fill only name, without surname)
     Examples:
     |name   |email          |phone        |city    |vacancy               |message                                                                                                  |
     |Vasja  |test@test.ru   |5555555555   |Moscow  |Продавец-консультант  |Недостаточно информации. Введите фамилию, имя и отчество через пробел (Например: Иванов Иван Алексеевич) |
-
-
-
-
-
-Scenario: Submit form with blank name
-
-    Given unauthorized user on the application form
-
-    When user enters valid data (email <email>, phone <phone>, city <city>, vacancy <vacancy>) except for the name <name>
-    And User selects checkbox of privacy policy
-
-    Then the submit button has stayed disabled
-    And the appropriate message '<message>' has displayed
-
-     Examples:
-     |name   |email          |phone        |city    |vacancy               |message           |
-     |       |test@test.ru   |5555555555   |Moscow  |Продавец-консультант  |Поле обязательное |
 
 
 
@@ -77,27 +98,7 @@ Scenario: Submit form with invalid name (symbols)
 
 
 
-
-Scenario: Submit form with blank email
-
-    Given unauthorized user on the application form
-
-    When user enters valid data (name <name>, phone <phone>, city <city>, vacancy <vacancy>) except for the email <email>
-    And User selects checkbox of privacy policy
-
-    Then the submit button has stayed disabled
-    And the appropriate message '<message>' has displayed
-
-     Examples:
-     |name          |email      |phone        |city    |vacancy               |message            |
-     |Вася Иванов   |           |5555555555   |Moscow  |Продавец-консультант  |Поле обязательное  |
-
-
-
-
-
-
-Scenario: Submit form with invalid email format
+Scenario: Submit form with invalid email
 
     Given unauthorized user on the application form
 
@@ -121,8 +122,6 @@ Scenario: Submit form with invalid email format
 
 
 
-
-
 Scenario: Submit form with invalid phone
 
     Given unauthorized user on the application form
@@ -141,7 +140,7 @@ Scenario: Submit form with invalid phone
 
 
 
-Scenario: Submit form with invalid phone (fill with symbols/letters)
+Scenario: Submit form with invalid phone (symbols/letters)
 
     Given unauthorized user on the application form
 
@@ -184,39 +183,6 @@ Scenario: Submit form with invalid city (symbols/numbers)
 
 
 
-
-Scenario: Submit form with blank city
-
-    Given unauthorized user on the application form
-
-    When user enters valid data (name <name>, email <email>, phone <phone>, vacancy <vacancy>) except for the city <city>
-    And User selects checkbox of privacy policy
-
-    Then the submit button has stayed disabled
-    And the appropriate message '<message>' has displayed
-
- Examples:
- |name          |email           |phone        |city    |vacancy               |message           |
- |Вася Иванов   |test@test.ru    |5555555555   |        |Продавец-консультант  |Поле обязательное |
-
-
-
-
-
-
-Scenario: Submit form with blank vacancy
-
-    Given unauthorized user on the application form
-
-    When user enters valid data (name <name>, email <email>, phone <phone>, city <city>) except for the vacancy <vacancy>
-    And User selects checkbox of privacy policy
-
-    Then the submit button has stayed disabled
-    And the appropriate message '<message>' has displayed
-
- Examples:
- |name          |email           |phone        |city    |vacancy           |message             |
- |Вася Иванов   |test@test.ru    |5555555555   |        |                  |Поле обязательное   |
 
 
 

@@ -1,7 +1,7 @@
 Feature: Click the link and the page scrolls to the job application form.
 
 
-Scenario: Navigate to the job application form through the link below the vacancy
+Scenario: Navigate to the form via vacancy link
 
     Given unauthorized user on moscow-job.tinkoff.ru page
 
@@ -24,7 +24,7 @@ Scenario: Navigate to the job application form through the link below the vacanc
 
 
 
-Scenario: Navigate to the job application form through the link "заявка"
+Scenario: Navigate to the form via link "заявка"
 
     Given unauthorized user on moscow-job.tinkoff.ru page
 
